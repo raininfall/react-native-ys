@@ -1,5 +1,5 @@
 rootProject.name = 'demo'
+include ':react-native-ys'
+project(':react-native-ys').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ys/android')
 
 include ':app'
-include ':react-native-orientation'
-project(':react-native-orientation').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-orientation/android')

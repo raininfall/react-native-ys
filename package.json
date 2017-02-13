@@ -1,37 +1,36 @@
 {
-  "name": "react-native-orientation",
-  "version": "1.17.0",
-  "description": "Listen to device orientation changes in react-native and set preferred orientation on screen to screen basis",
+  "name": "react-native-ys",
+  "version": "0.0.1",
+  "description": "open cloud of ys",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react-component",
     "react-native",
     "ios",
-    "orientation",
+    "yingshi",
     "android"
   ],
   "peerDependencies": {
-    "react-native": ">=0.5"
+    "react-native": ">=0.40"
   },
-  "author": "Yamill Vallecillo <yamill@gmail.com> (github.com/yamill)",
-  "license": "ISC",
+  "author": "RainInFall <onlycursedname@gmail.com> (github.com/RainInFall)",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamill/react-native-orientation.git"
+    "url": "git+https://github.com/RainInFall/react-native-ys.git"
   },
   "bugs": {
-    "url": "https://github.com/yamill/react-native-orientation/issues"
+    "url": "https://github.com/RainInFall/react-native-ys/issues"
   },
-  "homepage": "https://github.com/yamill/react-native-orientation#readme",
+  "homepage": "https://github.com/RainInFall/react-native-ys#readme",
   "rnpm": {
     "android": {
-      "packageInstance": "new OrientationPackage()"
+      "packageInstance": "new YSPackage()"
     },
     "ios": {
-      "project": "iOS/RCTOrientation.xcodeproj"
+      "project": "iOS/RCTYS.xcodeproj"
     }
   }
 }

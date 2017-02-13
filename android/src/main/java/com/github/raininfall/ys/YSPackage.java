@@ -1,4 +1,4 @@
-package com.github.yamill.orientation;
+package com.github.raininfall.ys;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -10,15 +10,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class OrientationPackage implements ReactPackage {
+public class YSPackage implements ReactPackage {
 
-    public OrientationPackage() {
+    public YSPackage() {
     }
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.<NativeModule>asList(
-            new OrientationModule(reactContext)
+            new YSModule(reactContext)
         );
     }
 
@@ -29,8 +29,8 @@ public class OrientationPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Arrays.asList();
+        return Arrays.<ViewManager>asList(
+            new YSRealPlayViewManager()
+        );
     }
 }
-
-

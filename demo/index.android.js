@@ -1,67 +1,51 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View
 } from 'react-native';
+import ys, {RealPlayView} from 'react-native-ys';
 
-import Orientation from 'react-native-orientation';
-
-class demo extends Component {
-  constructor() {
-    super();
-    const init = Orientation.getInitialOrientation();
-    this.state = {
-      init,
-      or: init,
-    };
-    this._updateOrientation = this._updateOrientation.bind(this);
-    Orientation.addOrientationListener(this._updateOrientation);
+export default class demo extends Component {
+  componentWillMount() {
+    ys.showSDKLog(false);
+    ys.enableP2P(true);
+    ys.initLib('a428ead782174f3ab6db3317843799f9', '', (result) => {
+      console.log(`init result ${result}`);
+      ys.setAccessToken('at.275ay3em7231p32p0qupg1ozbuumj14i-8oglsvihq7-18xb3wu-l7omgwpza');
+    });
   }
-
-  _updateOrientation(or) {
-    this.setState({ or });
+  componentDidMount() {
+    this.video.play("656492863", 1);
   }
 
   render() {
-    const { init, or} = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native Orientation Demo!
-        </Text>
-        <Text style={styles.instructions}>
-          {`Initial Orientation: ${init}`}
-        </Text>
-        <Text style={styles.instructions}>
-          {`Current Orientation: ${or}`}
-        </Text>
-        <TouchableOpacity
-          onPress={Orientation.unlockAllOrientations}
-          style={styles.button}
-        >
-          <Text style={styles.instructions}>
-            Unlock All Orientations
+        <View style={styles.container2} >
+          <RealPlayView
+            ref = { video => this.video = video }
+            style={{flex: 1}}/>
+        </View>
+        <View style={{flex: 1}}>
+          <Text style={styles.welcome}>
+            Welcome to React Native!
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={Orientation.lockToPortrait}
-          style={styles.button}
-        >
           <Text style={styles.instructions}>
-            Lock To Portrait
+            To get started, edit index.android.js
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={Orientation.lockToLandscape}
-          style={styles.button}
-        >
           <Text style={styles.instructions}>
-            Lock To Landscape
+            Double tap R on your keyboard to reload,{'\n'}
+            Shake or press menu button for dev menu
           </Text>
-        </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -70,9 +54,11 @@ class demo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-around',
     backgroundColor: '#F5FCFF',
+  },
+  container2: {
+    flex: 1,
   },
   welcome: {
     fontSize: 20,
@@ -84,14 +70,6 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-  button: {
-    padding: 5,
-    margin: 5,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 3,
-    backgroundColor: 'grey',
-  }
 });
 
 AppRegistry.registerComponent('demo', () => demo);

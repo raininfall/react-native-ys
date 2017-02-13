@@ -1,13 +1,24 @@
 {
-  "name": "demo",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
-  },
-  "dependencies": {
-    "react": "^15.1.0",
-    "react-native": "^0.27.2",
-    "react-native-orientation": ".."
-  }
+	"name": "demo",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest",
+    "sync-rnys": "rm -rf ./node_modules/react-native-ys; sane '/usr/bin/rsync -v -a --exclude .git --exclude demo --exclude node_modules ../ ./node_modules/react-native-ys/' .. --glob='{**/*.xml, **/*.gradle,**/*.java,**/*.json,**/*.js}'"
+	},
+	"dependencies": {
+		"react": "~15.4.0",
+		"react-native": "0.41.2",
+    "react-native-ys": "file:.."
+	},
+	"devDependencies": {
+		"babel-jest": "18.0.0",
+		"babel-preset-react-native": "1.9.1",
+		"jest": "18.1.0",
+		"react-test-renderer": "~15.4.0"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
 }
