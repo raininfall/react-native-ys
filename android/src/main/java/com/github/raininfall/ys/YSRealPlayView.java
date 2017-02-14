@@ -134,6 +134,10 @@ public class YSRealPlayView extends RelativeLayout implements SurfaceHolder.Call
   protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
     mFinishing = true;
+    if (null != mPlayer) {
+      mPlayer.release();
+      mPlayer = null;
+    }
   }
 
   private boolean isFinishing() {
