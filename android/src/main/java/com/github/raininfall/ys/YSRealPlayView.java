@@ -11,6 +11,11 @@ import android.view.SurfaceView;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.UIManagerModule;
+import com.facebook.react.uimanager.events.EventDispatcher;
+import com.github.raininfall.ys.events.OnPlayEvent;
+import com.github.raininfall.ys.events.OnStopEvent;
 import com.videogo.errorlayer.ErrorInfo;
 import com.videogo.openapi.EZConstants.EZRealPlayConstants;
 import com.videogo.openapi.EZOpenSDK;
@@ -37,20 +42,25 @@ public class YSRealPlayView extends RelativeLayout implements SurfaceHolder.Call
   /* Props */
   private String mDeviceSerial = "";
   private int mCameraNO = 0;
+  /* Event */
+  private final EventDispatcher eventDispatcher;
 
   private void handleGetCameraInfoSuccess() {
     //TODO: add functional button on view
   }
 
   private void handlePlaySuccess(Message msg) {
-    //TODO: here
     Log.i("RealPlayView", "Plat Start!");
+    eventDispatcher.dispatchEvent(new OnPlayEvent(getId(), 0, "OK"));
   }
 
   private void handlePlayFail(Object object) {
     if (null != object) {
       ErrorInfo errorInfo = (ErrorInfo) object;
       Log.e("RealPlayView", errorInfo.description);
+      eventDispatcher.dispatchEvent(new OnPlayEvent(getId(),
+              errorInfo.errorCode,
+              errorInfo.description));
     }
   }
 
@@ -78,6 +88,11 @@ public class YSRealPlayView extends RelativeLayout implements SurfaceHolder.Call
     //TODO: here
   }
 
+  private void handlePlayStop() {
+    Log.i("RealPlayView", "Play Stop!");
+    eventDispatcher.dispatchEvent(new OnStopEvent(getId()));
+  }
+
   @Override
   public boolean handleMessage(Message msg) {
     if (this.isFinishing()) {
@@ -85,7 +100,7 @@ public class YSRealPlayView extends RelativeLayout implements SurfaceHolder.Call
     }
     switch (msg.what) {
       case EZRealPlayConstants.MSG_REALPLAY_STOP_SUCCESS:
-        Log.i("RealPlayView", "Plat Stop!");
+        handlePlayStop();
         break;
       case EZRealPlayConstants.MSG_GET_CAMERA_INFO_SUCCESS:
 
@@ -144,7 +159,7 @@ public class YSRealPlayView extends RelativeLayout implements SurfaceHolder.Call
     return mFinishing;
   }
 
-  public YSRealPlayView(Context context) {
+  public YSRealPlayView(ThemedReactContext context) {
     super(context);
 
     LayoutInflater.from(context).inflate(R.layout.real_play, this);
@@ -156,6 +171,8 @@ public class YSRealPlayView extends RelativeLayout implements SurfaceHolder.Call
     mPlayerHandler = new Handler(this);
     /* Ready to play */
     mPlayStatus = STATUS_STOP;
+
+    this.eventDispatcher = context.getNativeModule(UIManagerModule.class).getEventDispatcher();
   }
 
   public void play(String deviceSerial, int cameraNO) {

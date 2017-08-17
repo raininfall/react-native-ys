@@ -33,11 +33,27 @@ export default class RealPlayView extends Component {
       );
   }
 
+  _onPlay = (event) => {
+    if (this.props.onPlay) {
+      this.props.onPlay(event);
+    }
+  }
+
+  _onStop = (event) => {
+    if (this.props.onStop) {
+      this.props.onStop(event);
+    }
+  }
+
   render() {
+    const { onPlay, onStop, ...props } = this.props;
+
     return (
       <RCTYSRealPlayView
-        {...this.props}
+        {...props}
         ref = {RCT_YS_REAL_PLAY_REF}
+        onPlay = {this._onPlay}
+        onStop = {this._onStop}
       />
     );
   }

@@ -8,6 +8,8 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.github.raininfall.ys.events.OnPlayEvent;
+import com.github.raininfall.ys.events.OnStopEvent;
 
 import java.util.Map;
 
@@ -37,6 +39,9 @@ public class YSRealPlayViewManager extends SimpleViewManager<YSRealPlayView> {
       case COMMAND_PLAY_ID:
         root.play(args.getString(0), args.getInt(1));
         return;
+      case COMMAND_STOP_ID:
+        root.stop();
+        return;
     }
   }
 
@@ -52,5 +57,13 @@ public class YSRealPlayViewManager extends SimpleViewManager<YSRealPlayView> {
     final YSRealPlayView view = new YSRealPlayView(reactContext);
     Log.i("RCTYSRealPlayView", "width: " + view.getWidth() + " height: "+ view.getHeight() );
     return view;
+  }
+
+  @Override
+  public @Nullable Map getExportedCustomDirectEventTypeConstants() {
+    return MapBuilder.of(
+            OnPlayEvent.EVENT_NAME, MapBuilder.of("registrationName", OnPlayEvent.EVENT_NAME),
+            OnStopEvent.EVENT_NAME, MapBuilder.of("registrationName", OnStopEvent.EVENT_NAME)
+    );
   }
 }

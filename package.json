@@ -28,6 +28,9 @@
   "rnpm": {
     "android": {
       "packageInstance": "new YSPackage()"
+    },
+    "ios": {
+      "project": "iOS/RCTYS.xcodeproj"
     }
   }
 }
