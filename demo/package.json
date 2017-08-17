@@ -10,7 +10,7 @@
 	"dependencies": {
 		"react": "~15.4.0",
 		"react-native": "0.41.2",
-    "react-native-ys": "file:.."
+    "react-native-ys": "0.0.4"
 	},
 	"devDependencies": {
 		"babel-jest": "18.0.0",

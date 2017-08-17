@@ -14,16 +14,38 @@ import {
 import ys, {RealPlayView} from 'react-native-ys';
 
 export default class demo extends Component {
+  closeTimer = null;
+
   componentWillMount() {
     ys.showSDKLog(false);
     ys.enableP2P(true);
-    ys.initLib('a428ead782174f3ab6db3317843799f9', '', (result) => {
+    ys.initLib('3ce9b9a3bbd450ab7de2b0f9c111d32', '', (result) => {
       console.log(`init result ${result}`);
-      ys.setAccessToken('at.275ay3em7231p32p0qupg1ozbuumj14i-8oglsvihq7-18xb3wu-l7omgwpza');
+      ys.setAccessToken('at.wngcpkc65ijtij70p3lbi0pb1i290x1-4u81mcnkle-0eesnsi-ypjxhbz3d');
     });
   }
+
   componentDidMount() {
-    this.video.play("656492863", 1);
+    this.video.play("49783092", 1);
+    closeTimer = setTimeout(() => {
+      this.video.stop();
+    }, 10 * 1000);
+  }
+
+  componentWillUnmount() {
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+      this.closeTimer = null;
+    }
+    this.video.stop();
+  }
+
+  onPlay = (event) => {
+    console.log(event.nativeEvent);
+  }
+
+  onStop = () => {
+    console.log('Video stopped!');
   }
 
   render() {
@@ -32,7 +54,10 @@ export default class demo extends Component {
         <View style={styles.container2} >
           <RealPlayView
             ref = { video => this.video = video }
-            style={{flex: 1}}/>
+            style={{flex: 1}}
+            onPlay={this.onPlay}
+            onStop={this.onStop}
+          />
         </View>
         <View style={{flex: 1}}>
           <Text style={styles.welcome}>
