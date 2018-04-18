@@ -2931,9 +2931,8 @@ react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/react-deep-force-update/download/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
 
-react-native-ys@0.0.4:
-  version "0.0.4"
-  resolved "http://registry.npm.taobao.org/react-native-ys/download/react-native-ys-0.0.4.tgz#c659075b14457d618376cd1b12d62ba69887d97c"
+react-native-ys@../:
+  version "0.0.5"
 
 react-native@0.41.2:
   version "0.41.2"

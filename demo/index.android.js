@@ -19,14 +19,14 @@ export default class demo extends Component {
   componentWillMount() {
     ys.showSDKLog(false);
     ys.enableP2P(true);
-    ys.initLib('3ce9b9a3bbd450ab7de2b0f9c111d32', '', (result) => {
+    ys.initLib(#{your app key}, '', (result) => {
       console.log(`init result ${result}`);
-      ys.setAccessToken('at.wngcpkc65ijtij70p3lbi0pb1i290x1-4u81mcnkle-0eesnsi-ypjxhbz3d');
+      ys.setAccessToken(#{your accessToken});
     });
   }
 
   componentDidMount() {
-    this.video.play("49783092", 1);
+    this.video.play(#{your canmera sn}, 1);
     closeTimer = setTimeout(() => {
       this.video.stop();
     }, 10 * 1000);
